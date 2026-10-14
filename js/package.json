@@ -1,0 +1,71 @@
+{
+  "name": "socialfi-api",
+  "version": "0.5.0",
+  "description": "SocialFi API — add a social layer to any app: login with X + verified wallets, live trades and PnL of your users, leaderboards and copy trading on Solana, BNB Chain, Base, Ethereum and Robinhood Chain. By CabalSpy ID.",
+  "keywords": [
+    "socialfi-api",
+    "socialfi-sdk",
+    "socialfi",
+    "social-trading",
+    "copy-trading",
+    "crypto-social",
+    "web3-social",
+    "kol",
+    "kol-tracker",
+    "wallet-tracker",
+    "trading-leaderboard",
+    "pnl",
+    "crypto-login",
+    "solana",
+    "bnb",
+    "base",
+    "ethereum",
+    "cabalspy",
+    "cabalspy-id",
+    "oidc",
+    "openid-connect",
+    "sdk"
+  ],
+  "license": "MIT",
+  "homepage": "https://www.cabalspy.xyz/cabalspy-id/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CabalSpy/socialfi-api.git",
+    "directory": "js"
+  },
+  "bugs": {
+    "url": "https://github.com/CabalSpy/socialfi-api/issues"
+  },
+  "type": "module",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "require": "./index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.cjs",
+    "index.d.ts",
+    "index.js"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/exports.test.mjs"
+  },
+  "dependencies": {
+    "cabalspy-id": "^0.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,53 @@
+name: publish
+
+# Publishes when a GitHub release is published, with Trusted Publishing (OIDC):
+# no token is stored anywhere.
+#
+# This repository holds two packages. The release tag decides which one is published:
+#   js-vX.Y.Z  ->  npm "socialfi-api"  (from js/)
+#   py-vX.Y.Z  ->  PyPI "socialfi-api"  (from python/)
+# The matching cabalspy-id version must already be published.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write # OIDC for trusted publishing and provenance
+
+jobs:
+  npm:
+    if: startsWith(github.event.release.tag_name, 'js-v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24 # ships npm 11, required for trusted publishing
+          registry-url: https://registry.npmjs.org
+      - run: npm install --no-package-lock
+        working-directory: js
+      - run: npm test
+        working-directory: js
+      - run: npm publish --access public
+        working-directory: js
+
+  pypi:
+    if: startsWith(github.event.release.tag_name, 'py-v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]" build
+        working-directory: python
+      - run: pytest
+        working-directory: python
+      - run: python -m build
+        working-directory: python
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/dist

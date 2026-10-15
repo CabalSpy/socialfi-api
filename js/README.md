@@ -11,7 +11,7 @@ npm install socialfi-api
 ```
 
 ```ts
-import { CabalSpyID, CabalSpyIDAuth, verifyWebhook } from 'socialfi-api';
+import { CabalSpyID, CabalSpyIDAuth, verifyWebhook, isTradeFeedTradeEvent } from 'socialfi-api';
 
 // Login with CabalSpy ID (OpenID Connect, PKCE) on your server
 const auth = new CabalSpyIDAuth({ clientId: 'csid_...', clientSecret: process.env.CSID_CLIENT_SECRET, redirectUri: 'https://your.app/callback' });
@@ -26,13 +26,18 @@ const t = await csid.tracker({ blockchain: 'solana', address, period: '30d' });
 const stream = csid.stream({ blockchain: 'solana' });
 stream.on('trade', (trade) => console.log(trade.trader?.username, trade.value_usd));
 await stream.connect();
+
+// Trade Feed (0.6.0): your users add traders (scope trade_feed), you tell them about every trade
+await csid.addToTradeFeed(claims.sub, '@alice', { min_sol: 0.5 });
+const event = await verifyWebhook({ payload: rawBody, headers: req.headers, secret: process.env.CSID_WEBHOOK_SECRET });
+if (isTradeFeedTradeEvent(event)) notifyUsers(event.data.recipients, event.data.trade);
 ```
 
-Contents: `CabalSpyID` (Data API), `CabalSpyIDStream`, `CabalSpyIDAuth` (OIDC), `verifyWebhook`, typed errors and response types — the `cabalspy-id/api` entry point. Full reference: [cabalspy-id README](https://github.com/CabalSpy/cabalspy-id-js#readme).
+Contents: `CabalSpyID` (Data API, including the Trade Feed methods), `CabalSpyIDStream`, `TradeFeedStream`, `CabalSpyIDAuth` (OIDC), `verifyWebhook` and the `trade_feed.*` type guards, typed errors and response types — the `cabalspy-id/api` entry point. Full reference: [cabalspy-id README](https://github.com/CabalSpy/cabalspy-id-js#readme).
 
 Token theses: [socialfi-thesis](https://github.com/CabalSpy/socialfi-thesis) · Browser widgets: [socialfi-widget](https://github.com/CabalSpy/socialfi-widget)
 
-Versions follow `cabalspy-id`: 0.5.0 depends on `cabalspy-id` 0.5.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
+Versions follow `cabalspy-id`: 0.6.0 depends on `cabalspy-id` ^0.6.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
 
 ## License
 

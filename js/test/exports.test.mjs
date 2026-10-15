@@ -29,3 +29,22 @@ test('the client works through the package', async () => {
   const client = new pkg.CabalSpyID({ apiKey: '', fetch: async () => new Response(JSON.stringify(body)) });
   assert.deepEqual(await client.health(), { status: 'ok', trade_sync_age_seconds: 1 });
 });
+
+// Trade Feed (cabalspy-id 0.6.0+): checked when the installed cabalspy-id has it.
+test('Trade Feed', { skip: !('TradeFeedStream' in core) && 'cabalspy-id < 0.6.0' }, async () => {
+  for (const name of ['TradeFeedStream', 'isTradeFeedEvent', 'isTradeFeedTradeEvent', 'isTradeFeedThesisEvent']) {
+    assert.equal(pkg[name], root[name], name);
+  }
+  assert.equal(pkg.isTradeFeedTradeEvent({ type: 'trade_feed.trade' }), true);
+  const calls = [];
+  const body = { success: true, data: { in_trade_feed: true, created: true }, meta: {} };
+  const client = new pkg.CabalSpyID({
+    apiKey: 'k',
+    fetch: async (url, init) => {
+      calls.push([String(url), init.method, JSON.parse(init.body)]);
+      return new Response(JSON.stringify(body), { status: 201 });
+    },
+  });
+  assert.equal((await client.addToTradeFeed('user', 'alice')).created, true);
+  assert.deepEqual(calls[0], ['https://api-id.cabalspy.xyz/v1/trade-feed/traders', 'POST', { csid_id: 'user', trader: 'alice' }]);
+});

@@ -27,6 +27,7 @@ board = CabalSpyID().leaderboard(blockchain="solana", period="7d", sort="pnl_usd
 - **Social trading feed** — every trade of your users live, with their X profile and PnL
 - **Leaderboards** — rank your users by PnL, volume, win rate or trades
 - **Copy trading** — follow verified wallets of real, identified traders
+- **Trade Feed** — your users add traders to their Trade Feed; you notify them of every trade and thesis (`addToTradeFeed`, `trade_feed.trade` webhooks with `recipients`, `TradeFeedStream`)
 - **Trader profiles** — X profile, verified wallets, holdings, PnL calendar
 - **KOL badges** — reviewed badges for influential traders
 
@@ -39,7 +40,7 @@ board = CabalSpyID().leaderboard(blockchain="solana", period="7d", sort="pnl_usd
 | [socialfi-thesis](https://github.com/CabalSpy/socialfi-thesis) | `socialfi-thesis` | `socialfi-thesis` |
 | [socialfi-widget](https://github.com/CabalSpy/socialfi-widget) | `socialfi-widget` | – |
 
-Versions follow `cabalspy-id`: 0.5.0 depends on `cabalspy-id` 0.5.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
+Versions follow `cabalspy-id`: npm 0.6.0 depends on `cabalspy-id` ^0.6.0 (Trade Feed); PyPI 0.5.0 depends on `cabalspy-id` 0.5.x (the PyPI package moves to 0.6.0 once `cabalspy-id` 0.6.0 is on PyPI). This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
 
 ## Releasing
 

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "socialfi-api"
-version = "0.5.0"
+version = "0.6.0"
 description = "SocialFi API — add a social layer to any app: login with X + verified wallets, live trades and PnL of your users, leaderboards and copy trading on Solana, BNB Chain, Base, Ethereum and Robinhood Chain. By CabalSpy ID."
 readme = "README.md"
 license = "MIT"
@@ -49,10 +49,10 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
-dependencies = ["cabalspy-id>=0.5.0,<0.6"]
+dependencies = ["cabalspy-id>=0.6.0,<0.7"]
 
 [project.optional-dependencies]
-stream = ["cabalspy-id[stream]>=0.5.0,<0.6"]
+stream = ["cabalspy-id[stream]>=0.6.0,<0.7"]
 dev = ["pytest>=8.0", "websockets>=14.0"]
 
 [project.urls]

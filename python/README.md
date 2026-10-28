@@ -22,7 +22,17 @@ board = csid.leaderboard(blockchain="solana", period="7d", sort="pnl_usd")
 
 Contents: `CabalSpyID` / `AsyncCabalSpyID` (Data API), `CabalSpyIDStream`, `CabalSpyIDAuth` (OIDC), `verify_webhook`, errors and response types — the `cabalspy_id.api` module. Full reference: [cabalspy-id README](https://github.com/CabalSpy/cabalspy-id-python#readme).
 
-Versions follow `cabalspy-id`: 0.5.0 depends on `cabalspy-id` 0.5.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
+## White-label
+
+Keep your own login: import your users and the wallets they already have, by your own user id, and use their trades, PnL, leaderboards and trading competitions. See the [White-Label docs](https://docs.cabalspy.xyz/cabalspy-id/white-label).
+
+```python
+csid.bulk_import_platform_users(users)   # any number, chunked and retried
+board = csid.platform_leaderboard(blockchain="solana", period="7d", sort="pnl_usd")
+comp = csid.create_competition(name="Weekly PnL", chain="solana", metric="pnl_usd", duration_hours=168)
+```
+
+Versions follow `cabalspy-id`: 0.6.0 depends on `cabalspy-id` 0.6.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
 
 ## License
 

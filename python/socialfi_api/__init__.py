@@ -12,7 +12,7 @@ import cabalspy_id.api as _source
 from cabalspy_id.api import *  # noqa: F403
 from cabalspy_id.api import __all__ as _source_all
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 #: The version of the cabalspy-id package doing the work.
 cabalspy_id_version: str = _source.__version__
 

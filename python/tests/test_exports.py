@@ -22,7 +22,7 @@ def test_entry_points() -> None:
         "NotFoundError",
     ]:
         assert getattr(socialfi_api, name) is getattr(source, name), name
-    assert socialfi_api.__version__ == "0.5.0"
+    assert socialfi_api.__version__ == "0.6.0"
     assert socialfi_api.cabalspy_id_version == source.__version__
 
 

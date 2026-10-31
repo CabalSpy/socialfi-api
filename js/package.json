@@ -1,12 +1,14 @@
 {
   "name": "socialfi-api",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "SocialFi API — add a social layer to any app: login with X + verified wallets, live trades and PnL of your users, leaderboards and copy trading on Solana, BNB Chain, Base, Ethereum and Robinhood Chain. By CabalSpy ID.",
   "keywords": [
     "socialfi-api",
     "socialfi-sdk",
     "socialfi",
     "social-trading",
+    "white-label",
+    "trading-competition",
     "copy-trading",
     "crypto-social",
     "web3-social",
@@ -63,7 +65,7 @@
     "test": "node --test test/exports.test.mjs"
   },
   "dependencies": {
-    "cabalspy-id": "^0.5.0"
+    "cabalspy-id": "^0.6.0"
   },
   "publishConfig": {
     "access": "public"

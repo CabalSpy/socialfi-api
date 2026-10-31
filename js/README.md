@@ -32,7 +32,17 @@ Contents: `CabalSpyID` (Data API), `CabalSpyIDStream`, `CabalSpyIDAuth` (OIDC), 
 
 Token theses: [socialfi-thesis](https://github.com/CabalSpy/socialfi-thesis) · Browser widgets: [socialfi-widget](https://github.com/CabalSpy/socialfi-widget)
 
-Versions follow `cabalspy-id`: 0.5.0 depends on `cabalspy-id` 0.5.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
+## White-label
+
+Keep your own login: import your users and the wallets they already have, by your own user id, and use their trades, PnL, leaderboards and trading competitions. See the [White-Label docs](https://docs.cabalspy.xyz/cabalspy-id/white-label).
+
+```ts
+await csid.importAllPlatformUsers(users);   // any number, chunked and retried
+const board = await csid.platformLeaderboard({ blockchain: 'solana', period: '7d', sort: 'pnl_usd' });
+const comp = await csid.createCompetition({ name: 'Weekly PnL', chain: 'solana', metric: 'pnl_usd', duration_hours: 168 });
+```
+
+Versions follow `cabalspy-id`: 0.6.0 depends on `cabalspy-id` 0.6.0. This package contains no code of its own — it re-exports part of `cabalspy-id`, so behaviour, fixes and types are always the same.
 
 ## License
 
